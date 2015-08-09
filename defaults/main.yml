@@ -14,7 +14,7 @@ samba_netbios_name: '{{ ansible_hostname }}'
 samba_server_string: '%h file server'
 
 # Name of the /etc/init.d/ service script
-samba_service_name: 'samba'
+samba_service_name: [ 'samba' ]
 
 # Manage iptables modules automatically
 samba_iptables: True
