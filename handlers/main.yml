@@ -1,5 +1,15 @@
 ---
 
 - name: Reload samba
-  service: name={{ samba_service_name }} state=reloaded
+  service: name={{ item }} state=reloaded
+  with_items: "{{ samba_service_name }}"
+  register: reloaded
+  ignore_errors: True
+  notify: Restart samba
+
+- name: Restart samba
+  service: name={{ item.item }} state=restarted
+  when: item|failed
+  with_items: reloaded.results
+
 
