@@ -1,8 +1,11 @@
 ---
+- name: Check samba config
+  command: testparm -s
+  notify: Restart samba
 
-- name: Reload samba
+- name: Restart samba
   service:
-    name: '{{ samba__service_name }}'
-    state: 'reloaded'
+    name: '{{ samba_service_name }}'
+    state: restarted
   when: ('samba' in samba__base_packages)
 
